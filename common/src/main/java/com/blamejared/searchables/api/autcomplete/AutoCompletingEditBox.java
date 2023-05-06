@@ -43,12 +43,6 @@ public class AutoCompletingEditBox<T> extends EditBox {
     }
     
     @Override
-    public boolean mouseScrolled(double xpos, double ypos, double delta) {
-        
-        return super.mouseScrolled(xpos, ypos, delta);
-    }
-    
-    @Override
     public boolean mouseClicked(double xpos, double ypos, int button) {
         
         if(this.isFocused() && autoComplete.mouseClicked(xpos, ypos, button)) {

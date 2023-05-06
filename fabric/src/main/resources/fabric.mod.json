@@ -1,0 +1,37 @@
+{
+  "schemaVersion": 1,
+  "id": "searchables",
+  "name": "Searchables",
+  "version": "${version}",
+  "environment": "client",
+  "icon": "assets/searchables/icon.png",
+  "authors": [
+    "Jaredlll08"
+  ],
+  "license": "MIT",
+  "contact": {
+    "homepage": "https://minecraft.curseforge.com/projects/searchables",
+    "sources": "https://github.com/jaredlll08/searchables"
+  },
+  "description": "A library mod to facilitate adding search bars with auto complete and search types.",
+  "entrypoints": {
+  },
+  "depends": {
+    "fabricloader": ">=0.14",
+    "java": ">=17",
+    "minecraft": "1.19.x"
+  },
+  "recommends": {
+    "fabric": "*"
+  },
+  "mixins": [
+    {
+      "config": "searchables.mixins.json",
+      "environment": "client"
+    },
+    {
+      "config": "searchables.fabric.mixins.json",
+      "environment": "client"
+    }
+  ]
+}

@@ -13,6 +13,11 @@ import org.joml.Vector2d;
 import java.util.*;
 import java.util.function.*;
 
+/**
+ * A small widget that displays current suggestions for an {@link AutoCompletingEditBox<T>}.
+ *
+ * @param <T> The type of element that is being searched for.
+ */
 public class AutoComplete<T> extends AbstractWidget implements Consumer<String> {
     
     private final SearchableType<T> type;
@@ -28,11 +33,34 @@ public class AutoComplete<T> extends AbstractWidget implements Consumer<String> 
     private final Vector2d lastMousePosition;
     private int lastCursorPosition;
     
+    /**
+     * Create a new AutoComplete with the given values and a {@code maxSuggestion} size of 7
+     *
+     * @param type             The {@link SearchableType<T>} that this {@link AutoComplete<T>} completes for.
+     * @param editBox          The attached {@link AutoCompletingEditBox<T>} that this {@link AutoComplete<T>} is attached to.
+     * @param entries          The entries that should be used for completion.
+     * @param x                The x position of this widget on the screen.
+     * @param y                The y position of this widget on the screen.
+     * @param width            The width of this widget on the screen.
+     * @param suggestionHeight The height of each individual suggestion. Recommended to be {@code Font#lineHeight + 2}
+     */
     public AutoComplete(SearchableType<T> type, AutoCompletingEditBox<T> editBox, Supplier<List<T>> entries, int x, int y, int width, int suggestionHeight) {
         
         this(type, editBox, entries, x, y, width, suggestionHeight, 7);
     }
     
+    /**
+     * Create a new AutoComplete with the given values.
+     *
+     * @param type             The {@link SearchableType<T>} that this {@link AutoComplete<T>} completes for.
+     * @param editBox          The attached {@link AutoCompletingEditBox<T>} that this {@link AutoComplete<T>} is attached to.
+     * @param entries          The entries that should be used for completion.
+     * @param x                The x position of this widget on the screen.
+     * @param y                The y position of this widget on the screen.
+     * @param width            The width of this widget on the screen.
+     * @param suggestionHeight The height of each individual suggestion.
+     * @param maxSuggestions   How many suggestions to show.
+     */
     public AutoComplete(SearchableType<T> type, AutoCompletingEditBox<T> editBox, Supplier<List<T>> entries, int x, int y, int width, int suggestionHeight, int maxSuggestions) {
         
         super(x, y, width, suggestionHeight * maxSuggestions, Component.empty());
@@ -48,6 +76,11 @@ public class AutoComplete<T> extends AbstractWidget implements Consumer<String> 
         this.lastCursorPosition = -1;
     }
     
+    /**
+     * Compiles suggestions for the given value.
+     *
+     * @param value the input argument
+     */
     @Override
     public void accept(String value) {
         
@@ -99,11 +132,17 @@ public class AutoComplete<T> extends AbstractWidget implements Consumer<String> 
         return false;
     }
     
+    /**
+     * Inserts the currently selected suggestion into attached {@link AutoCompletingEditBox<T>}.
+     */
     public void insertSuggestion() {
         
-        CompletionSuggestion suggestion = this.suggestions.get(displayOffset + selectedIndex);
-        this.editBox.deleteChars(suggestion.replacementRange());
-        this.editBox.insertText(suggestion.toInsert());
+        int index = displayOffset + selectedIndex;
+        if(index >= 0 && index < this.suggestions.size()) {
+            CompletionSuggestion suggestion = this.suggestions.get(index);
+            this.editBox.deleteChars(suggestion.replacementRange());
+            this.editBox.insertText(suggestion.toInsert());
+        }
     }
     
     @Override
@@ -126,7 +165,7 @@ public class AutoComplete<T> extends AbstractWidget implements Consumer<String> 
         this.lastMousePosition.set(mx, my);
     }
     
-    public void updateHoveringState(double xpos, double ypos) {
+    private void updateHoveringState(double xpos, double ypos) {
         
         if(!lastMousePosition.equals(xpos, ypos)) {
             selectedIndex = -1;
@@ -143,27 +182,43 @@ public class AutoComplete<T> extends AbstractWidget implements Consumer<String> 
         }
     }
     
+    /**
+     * Scrolls the current suggestions up by 1.
+     */
     public void scrollUp() {
         
         this.scrollUp(1);
     }
     
+    /**
+     * Scrolls the current suggestions up by the given amount.
+     *
+     * @param amount The amount to scroll by.
+     */
     public void scrollUp(int amount) {
         
         this.offsetDisplay(this.selectedIndex - amount);
     }
     
+    /**
+     * Scrolls the current suggestions down by 1.
+     */
     public void scrollDown() {
         
         this.scrollDown(1);
     }
     
+    /**
+     * Scrolls the current suggestions down by the given amount.
+     *
+     * @param amount The amount to scroll by.
+     */
     public void scrollDown(int amount) {
         
         this.offsetDisplay(this.selectedIndex + amount);
     }
     
-    public void offsetDisplay(int offset) {
+    private void offsetDisplay(int offset) {
         
         offset = Mth.clamp(offset, 0, shownSuggestions() - 1);
         final int halfSuggestions = Math.floorDiv(maxSuggestions, 2);
@@ -176,7 +231,7 @@ public class AutoComplete<T> extends AbstractWidget implements Consumer<String> 
         this.selectedIndex = currentItem - this.displayOffset;
     }
     
-    public int shownSuggestions() {
+    private int shownSuggestions() {
         
         return Math.min(maxSuggestions, suggestions.size());
     }
@@ -193,7 +248,7 @@ public class AutoComplete<T> extends AbstractWidget implements Consumer<String> 
     
     @Override
     protected void updateWidgetNarration(NarrationElementOutput output) {
-    
+        //TODO I am not sure what this should actually do.
     }
     
 }

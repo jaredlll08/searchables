@@ -1,7 +1,6 @@
 package com.blamejared.searchables.api.autcomplete;
 
-import com.blamejared.searchables.api.SearchableType;
-import com.blamejared.searchables.api.TokenRange;
+import com.blamejared.searchables.api.*;
 import com.blamejared.searchables.api.formatter.FormattingVisitor;
 import com.blamejared.searchables.mixin.AccessEditBox;
 import net.minecraft.client.gui.Font;
@@ -10,11 +9,8 @@ import net.minecraft.network.chat.Component;
 import org.jetbrains.annotations.Nullable;
 import org.lwjgl.glfw.GLFW;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.function.Consumer;
-import java.util.function.Predicate;
-import java.util.function.Supplier;
+import java.util.*;
+import java.util.function.*;
 
 public class AutoCompletingEditBox<T> extends EditBox {
     
@@ -33,10 +29,10 @@ public class AutoCompletingEditBox<T> extends EditBox {
         super(font, x, y, width, height, thisBox, message);
         this.formattingVisitor = new FormattingVisitor(type);
         this.completionVisitor = new CompletionVisitor();
-        this.autoComplete = new AutoComplete<>(type, this, entries, x, y + 2 + height, width, (font.lineHeight + 2));
-        setHint(Component.translatable("options.search"));
-        this.setFormatter(formattingVisitor);
-        this.setResponder(responders);
+        this.autoComplete = new AutoComplete<>(type, this, entries, x, y + 2 + height, width, font.lineHeight + 2);
+        setHint(SearchablesConstants.COMPONENT_SEARCH);
+        this.setFormatter(this.formattingVisitor);
+        this.setResponder(this.responders);
         addResponder(this.formattingVisitor);
         addResponder(this.completionVisitor);
         addResponder(this.autoComplete);
@@ -83,6 +79,11 @@ public class AutoCompletingEditBox<T> extends EditBox {
         return super.keyPressed(key, scancode, mods);
     }
     
+    /**
+     * Deletes the characters as the given {@link TokenRange}.
+     *
+     * @param range The range to delete characters from
+     */
     public void deleteChars(TokenRange range) {
         
         if(!this.getValue().isEmpty()) {
@@ -107,7 +108,12 @@ public class AutoCompletingEditBox<T> extends EditBox {
         return ((AccessEditBox) this).searchables$getResponder();
     }
     
+    /**
+     * Should not be used, use {@link AutoCompletingEditBox#addResponder(Consumer)} instead
+     */
+    @SuppressWarnings("DeprecatedIsStillUsed")
     @Override
+    @Deprecated
     public void setResponder(Consumer<String> responder) {
         
         if(this.getResponder() == null) {

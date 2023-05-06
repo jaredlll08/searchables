@@ -8,26 +8,34 @@ import com.blamejared.searchables.lang.expression.visitor.Visitor;
 import java.util.*;
 import java.util.function.Consumer;
 
+/**
+ * Generates a list of TokenRanges that can be used to split a given string into parts.
+ * Mainly used to split strings for completion purposes.
+ */
 public class CompletionVisitor implements Visitor<TokenRange>, Consumer<String> {
     
     private final List<TokenRange> tokens = new ArrayList<>();
     private TokenRange lastRange = TokenRange.EMPTY;
     
+    /**
+     * Resets this visitor to a state that allows it to run again.
+     */
     public void reset() {
         
         tokens.clear();
         lastRange = TokenRange.EMPTY;
     }
     
-    public List<TokenRange> tokens() {
-        
-        return tokens;
-    }
-    
-    public void reduceTokens() {
-        
-        //TODO look into if this is even needed or if it can be done while visiting
-        
+    /**
+     * Reduces the tokens into their outermost parts.
+     * For example the string {@code "shape:square color:red"} will be split into:
+     * {@code [
+     * TokenRange(0, 12, [TokenRange(0, 5), TokenRange(5, 6), TokenRange(6, 12)]),
+     * TokenRange(13, 22, [TokenRange(13, 18), TokenRange(18, 19), TokenRange(19, 22)])
+     * ]}
+     */
+    protected void reduceTokens() {
+        // Can this be done while visiting?
         ListIterator<TokenRange> iterator = tokens.listIterator(tokens.size());
         TokenRange lastRange = null;
         while(iterator.hasPrevious()) {
@@ -45,6 +53,23 @@ public class CompletionVisitor implements Visitor<TokenRange>, Consumer<String> 
         }
     }
     
+    /**
+     * Gets the tokens in this visitor.
+     *
+     * @return The tokens in this visitor.
+     */
+    public List<TokenRange> tokens() {
+        
+        return tokens;
+    }
+    
+    /**
+     * Gets the {@link Optional<TokenRange>} at the given position.
+     *
+     * @param position The current cursor position.
+     *
+     * @return An {@link Optional<TokenRange>} at the given range, or an empty optional if out of bounds.
+     */
     public Optional<TokenRange> tokenAt(final int position) {
         
         return tokens.stream()
@@ -52,6 +77,13 @@ public class CompletionVisitor implements Visitor<TokenRange>, Consumer<String> 
                 .findFirst();
     }
     
+    /**
+     * Gets the {@link TokenRange} at the given position, or {@link TokenRange#EMPTY} if out of bounds.
+     *
+     * @param position The current cursor position.
+     *
+     * @return An {@link TokenRange} at the given range, or {@link TokenRange#EMPTY} if out of bounds.
+     */
     public TokenRange rangeAt(final int position) {
         
         return tokenAt(position).orElse(TokenRange.EMPTY);
@@ -107,6 +139,11 @@ public class CompletionVisitor implements Visitor<TokenRange>, Consumer<String> 
         return TokenRange.between(oldRange.end(), oldRange.end() + end);
     }
     
+    /**
+     * Resets this visitor and compiles a list of {@link TokenRange} from the given String
+     *
+     * @param search The string to search
+     */
     @Override
     public void accept(final String search) {
         
@@ -115,7 +152,7 @@ public class CompletionVisitor implements Visitor<TokenRange>, Consumer<String> 
     }
     
     @Override
-    public TokenRange postVisit(TokenRange obj) {
+    public TokenRange postVisit(final TokenRange obj) {
         
         this.reduceTokens();
         return Visitor.super.postVisit(obj);

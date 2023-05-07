@@ -17,7 +17,7 @@ pluginManagement {
         }
     }
 }
-rootProject.name = "Searchables"
+rootProject.name = "searchables"
 include("common")
 include("fabric")
 include("forge")

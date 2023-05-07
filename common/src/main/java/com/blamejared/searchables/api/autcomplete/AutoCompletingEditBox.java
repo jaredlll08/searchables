@@ -27,6 +27,7 @@ public class AutoCompletingEditBox<T> extends EditBox {
     public AutoCompletingEditBox(Font font, int x, int y, int width, int height, @Nullable EditBox thisBox, Component message, SearchableType<T> type, Supplier<List<T>> entries) {
         
         super(font, x, y, width, height, thisBox, message);
+        this.setMaxLength(Integer.MAX_VALUE);
         this.formattingVisitor = new FormattingVisitor(type);
         this.completionVisitor = new CompletionVisitor();
         this.autoComplete = new AutoComplete<>(type, this, entries, x, y + 2 + height, width, font.lineHeight + 2);

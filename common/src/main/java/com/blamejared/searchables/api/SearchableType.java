@@ -93,7 +93,7 @@ public final class SearchableType<T> {
                 .map(Optional::get)
                 .filter(s -> StringUtils.startsWithIgnoreCase(s, termString))
                 .sorted(Comparator.naturalOrder())
-                .map(SearchableComponent.QUOTE)
+                .map(SearchablesConstants.QUOTE)
                 .map(s -> new CompletionSuggestion(componentName + ":" + s, Component.literal(s), " ", replacementRange))
                 .distinct()
                 .collect(Collectors.toList());

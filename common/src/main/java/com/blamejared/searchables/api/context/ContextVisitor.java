@@ -1,12 +1,12 @@
 package com.blamejared.searchables.api.context;
 
-import com.blamejared.searchables.lang.expression.type.ComponentExpression;
-import com.blamejared.searchables.lang.expression.type.GroupingExpression;
-import com.blamejared.searchables.lang.expression.type.LiteralExpression;
-import com.blamejared.searchables.lang.expression.type.PairedExpression;
+import com.blamejared.searchables.lang.expression.type.*;
 import com.blamejared.searchables.lang.expression.visitor.Visitor;
 
-public class ContextVisitor<T> implements Visitor<SearchContext<T>> {
+/**
+ * Compiles a {@link SearchContext<T>}, which holds {@link SearchLiteral<T>}({@code "orange"}) and {@link SearchComponent<T>}({@code "color:orange"})
+ */
+public final class ContextVisitor<T> implements Visitor<SearchContext<T>> {
     
     private final SearchContext<T> context = new SearchContext<>();
     
@@ -25,6 +25,7 @@ public class ContextVisitor<T> implements Visitor<SearchContext<T>> {
             context.add(new SearchComponent<>(leftLit.value(), rightLit.value()));
         } else {
             //TODO Do we want to handle a case of 'first:second:third'?
+            //This *should* be an error case, but it can also be put into a component
         }
         return context;
     }

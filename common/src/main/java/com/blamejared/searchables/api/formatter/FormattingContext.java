@@ -2,6 +2,13 @@ package com.blamejared.searchables.api.formatter;
 
 import net.minecraft.network.chat.Style;
 
+/**
+ * Extra context used by the {@link FormattingVisitor}.
+ *
+ * @param isKey Is the current expression a key
+ * @param style The style to apply to the current expression
+ * @param valid If the current expression is valid.
+ */
 public record FormattingContext(boolean isKey, Style style, boolean valid) {
     
     public static FormattingContext empty() {

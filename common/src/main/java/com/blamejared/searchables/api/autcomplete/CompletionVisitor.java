@@ -68,7 +68,7 @@ public class CompletionVisitor implements Visitor<TokenRange>, Consumer<String> 
      *
      * @param position The current cursor position.
      *
-     * @return An {@link Optional<TokenRange>} at the given range, or an empty optional if out of bounds.
+     * @return An {@link Optional<TokenRange>} at the given position, or an empty optional if out of bounds.
      */
     public Optional<TokenRange> tokenAt(final int position) {
         

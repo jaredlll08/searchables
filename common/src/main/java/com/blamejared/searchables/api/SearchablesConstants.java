@@ -6,6 +6,7 @@ import net.minecraft.resources.ResourceLocation;
 public class SearchablesConstants {
     
     public static final String MOD_ID = "searchables";
+    public static final String STRING_CHARACTERS = "'\"`";
     
     public static final Component COMPONENT_SEARCH = Component.translatable("options.search");
     

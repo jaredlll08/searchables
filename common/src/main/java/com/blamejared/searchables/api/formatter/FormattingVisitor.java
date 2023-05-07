@@ -1,23 +1,19 @@
 package com.blamejared.searchables.api.formatter;
 
-import com.blamejared.searchables.api.SearchableType;
-import com.blamejared.searchables.api.TokenRange;
+import com.blamejared.searchables.api.*;
 import com.blamejared.searchables.lang.StringSearcher;
-import com.blamejared.searchables.lang.expression.type.ComponentExpression;
-import com.blamejared.searchables.lang.expression.type.GroupingExpression;
-import com.blamejared.searchables.lang.expression.type.LiteralExpression;
-import com.blamejared.searchables.lang.expression.type.PairedExpression;
+import com.blamejared.searchables.lang.expression.type.*;
 import com.blamejared.searchables.lang.expression.visitor.ContextAwareVisitor;
 import com.mojang.datafixers.util.Pair;
 import net.minecraft.network.chat.Style;
 import net.minecraft.util.FormattedCharSequence;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-import java.util.function.BiFunction;
-import java.util.function.Consumer;
+import java.util.*;
+import java.util.function.*;
 
+/**
+ * Applies style formatting for an {@link net.minecraft.client.gui.components.EditBox}, intended to be passed into {@link net.minecraft.client.gui.components.EditBox#setFormatter(BiFunction)}.
+ */
 public class FormattingVisitor implements ContextAwareVisitor<TokenRange, FormattingContext>, Consumer<String>, BiFunction<String, Integer, FormattedCharSequence> {
     
     private final SearchableType<?> type;
@@ -30,6 +26,9 @@ public class FormattingVisitor implements ContextAwareVisitor<TokenRange, Format
         this.type = type;
     }
     
+    /**
+     * Resets this visitor to a state that allows it to run again.
+     */
     public void reset() {
         
         tokens.clear();
@@ -41,6 +40,13 @@ public class FormattingVisitor implements ContextAwareVisitor<TokenRange, Format
         return tokens;
     }
     
+    /**
+     * Gets the {@link Optional<Pair>} of {@link TokenRange} and {@link Style} at the given position.
+     *
+     * @param position The current cursor position.
+     *
+     * @return An {@link Optional<Pair>} of {@link TokenRange} and {@link Style} at the given position, or an empty optional if out of bounds.
+     */
     public Optional<Pair<TokenRange, Style>> tokenAt(final int position) {
         
         return tokens.stream()

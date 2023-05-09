@@ -1,7 +1,7 @@
 package com.blamejared.searchables.gradle
 
 object Versions {
-    const val MOD = "1.0.0"
+    const val MOD = "1.0"
     const val JAVA = "17"
     const val MINECRAFT = "1.19.4"
     const val FORGE = "45.0.4"

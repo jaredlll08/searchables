@@ -11,5 +11,6 @@
   ],
   "injectors": {
     "defaultRequire": 1
-  }
+  },
+  "refmap": "searchables.refmap.json"
 }

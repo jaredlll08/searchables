@@ -1,6 +1,6 @@
+import com.blamejared.modtemplate.Utils
 import com.blamejared.searchables.gradle.Properties
 import com.blamejared.searchables.gradle.Versions
-import com.blamejared.modtemplate.Utils
 import net.darkhax.curseforgegradle.TaskPublishCurseForge
 import net.darkhax.curseforgegradle.Constants as CFG_Constants
 
@@ -12,20 +12,20 @@ plugins {
 
 dependencies {
     minecraft("com.mojang:minecraft:${Versions.MINECRAFT}")
-    mappings(loom.layered {
-        officialMojangMappings()
-        parchment("org.parchmentmc.data:parchment-1.18.1:2021.12.19@zip")
-    })
+    mappings(loom.officialMojangMappings())
     modImplementation("net.fabricmc:fabric-loader:${Versions.FABRIC_LOADER}")
     modImplementation("net.fabricmc.fabric-api:fabric-api:${Versions.FABRIC}")
     implementation(project(":common"))
 }
 
 loom {
+    mixin {
+        defaultRefmapName.set("${Properties.MODID}.refmap.json")
+    }
     runs {
         named("client") {
             client()
-            setConfigName("Fabric Client")
+            configName = "Fabric Client"
             ideConfigGenerated(true)
             runDir("run")
         }

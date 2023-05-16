@@ -58,9 +58,6 @@ class DefaultPlugin : Plugin<Project> {
             this.add(this.maven("https://maven.blamejared.com/") {
                 name = "BlameJared"
             })
-            this.add(this.maven("https://maven.parchmentmc.org/") {
-                name = "ParchmentMC"
-            })
         }
 
     }
@@ -103,16 +100,10 @@ class DefaultPlugin : Plugin<Project> {
                 }
             }
 
+            @Suppress("UnstableApiUsage")
             withType<ProcessResources> {
                 outputs.upToDateWhen { false }
                 inputs.property("version", project.version)
-                filesMatching("*.mixins.json") {
-                    if (project.name == "fabric") {
-                        expand("refmap_target" to "${project.extensions.getByType(BasePluginExtension::class.java).archivesName.get()}-")
-                    } else {
-                        expand("refmap_target" to "${Properties.MODID}.")
-                    }
-                }
                 filesMatching("fabric.mod.json") {
                     expand("version" to project.version)
                 }

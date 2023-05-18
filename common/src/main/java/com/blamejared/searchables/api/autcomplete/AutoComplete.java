@@ -6,7 +6,9 @@ import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.components.AbstractWidget;
 import net.minecraft.client.gui.narration.NarrationElementOutput;
+import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TextComponent;
 import net.minecraft.util.Mth;
 
 import java.util.*;
@@ -62,7 +64,7 @@ public class AutoComplete<T> extends AbstractWidget implements Consumer<String> 
      */
     public AutoComplete(SearchableType<T> type, AutoCompletingEditBox<T> editBox, Supplier<List<T>> entries, int x, int y, int width, int suggestionHeight, int maxSuggestions) {
         
-        super(x, y, width, suggestionHeight * maxSuggestions, Component.empty());
+        super(x, y, width, suggestionHeight * maxSuggestions, new TextComponent(""));
         this.type = type;
         this.editBox = editBox;
         this.entries = entries;

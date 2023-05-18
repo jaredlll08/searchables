@@ -7,6 +7,7 @@ import com.blamejared.searchables.lang.StringSearcher;
 import com.google.common.base.CharMatcher;
 import com.google.common.collect.ImmutableMap;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TextComponent;
 import org.apache.commons.lang3.StringUtils;
 import org.jetbrains.annotations.Nullable;
 
@@ -75,7 +76,7 @@ public final class SearchableType<T> {
                 .stream()
                 .filter(s -> StringUtils.startsWithIgnoreCase(s, componentName))
                 .sorted(Comparator.naturalOrder())
-                .map(s -> new CompletionSuggestion(s, Component.literal(s), ":", replacementRange))
+                .map(s -> new CompletionSuggestion(s, new TextComponent(s), ":", replacementRange))
                 .distinct()
                 .collect(Collectors.toList());
     }
@@ -94,7 +95,7 @@ public final class SearchableType<T> {
                 .filter(s -> StringUtils.startsWithIgnoreCase(s, termString))
                 .sorted(Comparator.naturalOrder())
                 .map(SearchablesConstants.QUOTE)
-                .map(s -> new CompletionSuggestion(componentName + ":" + s, Component.literal(s), " ", replacementRange))
+                .map(s -> new CompletionSuggestion(componentName + ":" + s, new TextComponent(s), " ", replacementRange))
                 .distinct()
                 .collect(Collectors.toList());
         

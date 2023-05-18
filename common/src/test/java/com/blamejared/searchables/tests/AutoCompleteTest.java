@@ -6,6 +6,7 @@ import com.blamejared.searchables.api.autcomplete.CompletionSuggestion;
 import com.blamejared.searchables.api.autcomplete.CompletionVisitor;
 import com.blamejared.searchables.lang.StringSearcher;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TextComponent;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -330,7 +331,7 @@ public class AutoCompleteTest {
     
     private CompletionSuggestion suggestion(String suggestion, String display, String suffix, int rangeStart, int rangeEnd) {
         
-        return new CompletionSuggestion(suggestion, Component.literal(display), suffix, TokenRange.between(rangeStart, rangeEnd));
+        return new CompletionSuggestion(suggestion, new TextComponent(display), suffix, TokenRange.between(rangeStart, rangeEnd));
     }
     
 }

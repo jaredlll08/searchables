@@ -2,6 +2,7 @@ package com.blamejared.searchables.api;
 
 import net.minecraft.Util;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.resources.ResourceLocation;
 import org.apache.commons.lang3.StringUtils;
 
@@ -13,7 +14,7 @@ public class SearchablesConstants {
     public static final String MOD_ID = "searchables";
     public static final String STRING_CHARACTERS = "'\"`";
     
-    public static final Component COMPONENT_SEARCH = Component.translatable("options.search");
+    public static final Component COMPONENT_SEARCH = new TranslatableComponent("options.search");
     
     // A user can't search for a term that contains at-least one of each string character,
     // as it will be impossible to tokenize as the engine doesn't have escaped quotes (yet), so lets filter them out.

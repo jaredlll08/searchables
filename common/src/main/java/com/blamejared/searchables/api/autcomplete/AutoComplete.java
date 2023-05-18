@@ -8,7 +8,6 @@ import net.minecraft.client.gui.components.AbstractWidget;
 import net.minecraft.client.gui.narration.NarrationElementOutput;
 import net.minecraft.network.chat.Component;
 import net.minecraft.util.Mth;
-import org.joml.Vector2d;
 
 import java.util.*;
 import java.util.function.*;
@@ -246,9 +245,51 @@ public class AutoComplete<T> extends AbstractWidget implements Consumer<String> 
         return editBox;
     }
     
+    protected int getX() {
+        
+        return x;
+    }
+    
+    protected int getY() {
+        
+        return y;
+    }
+    
     @Override
-    protected void updateWidgetNarration(NarrationElementOutput output) {
+    public void updateNarration(NarrationElementOutput output) {
         //TODO I am not sure what this should actually do.
+    }
+    
+    // No joml on older versions :(
+    private static class Vector2d {
+        
+        public double x;
+        public double y;
+        
+        public Vector2d(double x, double y) {
+            
+            this.x = x;
+            this.y = y;
+        }
+        
+        
+        public void set(double val) {
+            
+            this.x = val;
+            this.y = val;
+        }
+        
+        public void set(double x, double y) {
+            
+            this.x = x;
+            this.y = y;
+        }
+        
+        public boolean equals(double x, double y) {
+            
+            return Double.doubleToLongBits(this.x) != Double.doubleToLongBits(x) && Double.doubleToLongBits(this.y) == Double.doubleToLongBits(y);
+        }
+        
     }
     
 }

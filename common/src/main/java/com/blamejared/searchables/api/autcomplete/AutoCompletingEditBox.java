@@ -31,7 +31,6 @@ public class AutoCompletingEditBox<T> extends EditBox {
         this.formattingVisitor = new FormattingVisitor(type);
         this.completionVisitor = new CompletionVisitor();
         this.autoComplete = new AutoComplete<>(type, this, entries, x, y + 2 + height, width, font.lineHeight + 2);
-        setHint(SearchablesConstants.COMPONENT_SEARCH);
         this.setFormatter(this.formattingVisitor);
         this.setResponder(this.responders);
         addResponder(this.formattingVisitor);

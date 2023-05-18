@@ -19,7 +19,6 @@ class LoaderPlugin : Plugin<Project> {
     override fun apply(project: Project): Unit = project.run {
 
         applyJavaPlugin(project)
-        applyDependencies(project)
         applyModTemplate(project)
     }
 
@@ -50,9 +49,6 @@ class LoaderPlugin : Plugin<Project> {
             }
 
         }
-    }
-
-    private fun applyDependencies(project: Project) {
     }
 
     private fun applyModTemplate(project: Project) {

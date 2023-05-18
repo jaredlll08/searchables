@@ -129,7 +129,6 @@ class DefaultPlugin : Plugin<Project> {
 
     private fun applyDependencies(project: Project) {
         val implementation = project.configurations.getByName("implementation")
-        val compileOnly = project.configurations.getByName("compileOnly")
         val annotationProcessor = project.configurations.getByName("annotationProcessor")
 
         implementation.dependencies.add(project.dependencies.create("com.google.code.findbugs:jsr305:3.0.2"))

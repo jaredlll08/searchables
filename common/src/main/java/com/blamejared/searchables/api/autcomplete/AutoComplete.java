@@ -146,7 +146,7 @@ public class AutoComplete<T> extends AbstractWidget implements Consumer<String> 
     }
     
     @Override
-    public void renderWidget(PoseStack pose, int mx, int my, float partial) {
+    public void renderButton(PoseStack pose, int mx, int my, float partial) {
         
         if(!editBox.isFocused()) {
             return;

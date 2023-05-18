@@ -5,7 +5,7 @@ license = "MIT"
 
 [[mods]]
 modId = "searchables"
-updateJSONURL = "https://updates.blamejared.com/get?n=searchables&gv=1.19.4"
+updateJSONURL = "https://updates.blamejared.com/get?n=searchables&gv=1.19.3"
 version = "${file.jarVersion}"
 displayName = "Searchables"
 displayURL = "https://minecraft.curseforge.com/projects/searchables"

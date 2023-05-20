@@ -18,8 +18,8 @@
   },
   "depends": {
     "fabricloader": ">=0.14",
-    "java": ">=17",
-    "minecraft": "1.18.x"
+    "java": ">=16",
+    "minecraft": "1.17.x"
   },
   "recommends": {
     "fabric": "*"

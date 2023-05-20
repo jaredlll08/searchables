@@ -157,7 +157,7 @@ public final class SearchableType<T> {
         
         public SearchableType<T> build() {
             //TODO An event could be fired here to allow 3rd parties to add new components
-            return new SearchableType<>(components.buildOrThrow(), defaultComponent);
+            return new SearchableType<>(components.build(), defaultComponent);
         }
         
     }

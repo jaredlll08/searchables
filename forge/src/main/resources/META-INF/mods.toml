@@ -1,11 +1,11 @@
 modLoader = "javafml"
-loaderVersion = "[40,)"
+loaderVersion = "[37,)"
 issueTrackerURL = "https://github.com/jaredlll08/searchables/issues"
 license = "MIT"
 
 [[mods]]
 modId = "searchables"
-updateJSONURL = "https://updates.blamejared.com/get?n=searchables&gv=1.18.2"
+updateJSONURL = "https://updates.blamejared.com/get?n=searchables&gv=1.17.1"
 version = "${file.jarVersion}"
 displayName = "Searchables"
 displayURL = "https://minecraft.curseforge.com/projects/searchables"
@@ -18,10 +18,10 @@ itemIcon = "minecraft:compass"
 [[dependencies.searchables]]
 modId = "forge"
 mandatory = true
-versionRange = "[40,)"
+versionRange = "[37,)"
 ordering = "NONE"
 [[dependencies.searchables]]
 modId = "minecraft"
 mandatory = true
-versionRange = "[1.18,)"
+versionRange = "[1.17,)"
 ordering = "NONE"

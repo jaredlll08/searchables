@@ -3,6 +3,6 @@
 @FieldsAreNonnullByDefault
 package com.blamejared.searchables.api;
 
-import net.minecraft.*;
+import com.blamejared.searchables.api.util.*;
 
 import javax.annotation.ParametersAreNonnullByDefault;

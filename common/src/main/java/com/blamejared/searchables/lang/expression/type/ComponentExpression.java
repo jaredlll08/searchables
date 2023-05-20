@@ -2,8 +2,7 @@ package com.blamejared.searchables.lang.expression.type;
 
 import com.blamejared.searchables.lang.Token;
 import com.blamejared.searchables.lang.expression.Expression;
-import com.blamejared.searchables.lang.expression.visitor.ContextAwareVisitor;
-import com.blamejared.searchables.lang.expression.visitor.Visitor;
+import com.blamejared.searchables.lang.expression.visitor.*;
 
 public class ComponentExpression extends Expression {
     
@@ -48,7 +47,7 @@ public class ComponentExpression extends Expression {
     @Override
     public String toString() {
         
-        return "[%s%s%s]".formatted(left, operator.literal(), right);
+        return String.format("[%s%s%s]", left, operator.literal(), right);
     }
     
 }

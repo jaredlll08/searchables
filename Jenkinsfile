@@ -3,7 +3,7 @@
 pipeline {
     agent any
     tools {
-        jdk "jdk-17.0.1"
+        jdk "jdk8u292-b10"
     }
     environment {
         curseforgeApiToken = credentials('curseforge_token')

@@ -1,7 +1,6 @@
 package com.blamejared.searchables.lang;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class SLScanner {
     
@@ -31,12 +30,24 @@ public class SLScanner {
         
         char c = advance();
         switch(c) {
-            case ' ' -> space();
-            case ':' -> addToken(TokenType.COLON, ":");
-            case '"' -> string('"');
-            case '\'' -> string('\'');
-            case '`' -> string('`');
-            default -> identifier();
+            case ' ':
+                space();
+                break;
+            case ':':
+                addToken(TokenType.COLON, ":");
+                break;
+            case '"':
+                string('"');
+                break;
+            case '\'':
+                string('\'');
+                break;
+            case '`':
+                string('`');
+                break;
+            default:
+                identifier();
+                break;
         }
     }
     

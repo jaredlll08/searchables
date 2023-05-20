@@ -3,8 +3,8 @@
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 [![GitHub issues](https://img.shields.io/github/issues/jaredlll08/searchables?style=flat-square)](https://github.com/jaredlll08/searchables/issues)
-[![GitHub license](https://img.shields.io/github/license/jaredlll08/searchables?color=0690ff&style=flat-square)](https://github.com/jaredlll08/searchables/blob/1.17.1/LICENSE)
-[![Jenkins](https://img.shields.io/jenkins/build?jobUrl=https%3A%2F%2Fci.blamejared.com%2Fjob%2FJared%2Fjob%2FMinecraft%2520Mods%2Fjob%2FSearchables%2Fjob%2F1.17.1%2F&style=flat-square)](https://ci.blamejared.com/job/Jared/job/Minecraft%20Mods/job/Searchables/job/1.17.1/)
+[![GitHub license](https://img.shields.io/github/license/jaredlll08/searchables?color=0690ff&style=flat-square)](https://github.com/jaredlll08/searchables/blob/1.16.5/LICENSE)
+[![Jenkins](https://img.shields.io/jenkins/build?jobUrl=https%3A%2F%2Fci.blamejared.com%2Fjob%2FJared%2Fjob%2FMinecraft%2520Mods%2Fjob%2FSearchables%2Fjob%2F1.16.5%2F&style=flat-square)](https://ci.blamejared.com/job/Jared/job/Minecraft%20Mods/job/Searchables/job/1.16.5/)
 [![Discord](https://img.shields.io/badge/Discord-%237289DA?style=flat-square&logo=Discord&logoColor=white)](https://discord.blamejared.com/)
 [![](http://cf.way2muchnoise.eu/searchables.svg?badge_style=flat)](https://minecraft.curseforge.com/projects/searchables)
 
@@ -108,7 +108,7 @@ If you're running into a bug or have a feature request, please don't be afraid t
 
 ## License
 
-Distributed under the MIT License. See the [LICENSE](https://github.com/jaredlll08/searchables/blob/1.17.1/LICENSE) file for more information.
+Distributed under the MIT License. See the [LICENSE](https://github.com/jaredlll08/searchables/blob/1.16.5/LICENSE) file for more information.
 
 ## Setup
 
@@ -144,35 +144,35 @@ repositories {
 
 Then, depending on what modloader you are using, you can use the following snippets, just replace `[VERSION]` with the latest version for each artifact.
 
-### Fabric [![Maven](https://img.shields.io/maven-metadata/v?color=C71A36&label=Latest%20version&logo=Latest%20version&metadataUrl=https%3A%2F%2Fmaven.blamejared.com%2Fcom%2Fblamejared%2Fsearchables%2FSearchables-fabric-1.17.1%2Fmaven-metadata.xml&style=flat-square)](https://maven.blamejared.com/com/blamejared/searchables/Searchables-fabric-1.17.1/)
+### Fabric [![Maven](https://img.shields.io/maven-metadata/v?color=C71A36&label=Latest%20version&logo=Latest%20version&metadataUrl=https%3A%2F%2Fmaven.blamejared.com%2Fcom%2Fblamejared%2Fsearchables%2FSearchables-fabric-1.16.5%2Fmaven-metadata.xml&style=flat-square)](https://maven.blamejared.com/com/blamejared/searchables/Searchables-fabric-1.16.5/)
 
 ```kotlin
 dependencies {
-    modImplementation("com.blamejared.searchables:Searchables-fabric-1.17.1:[VERSION]")
+    modImplementation("com.blamejared.searchables:Searchables-fabric-1.16.5:[VERSION]")
     // Example:
-    // modImplementation("com.blamejared.searchables:Searchables-fabric-1.17.1:1.0.0")
+    // modImplementation("com.blamejared.searchables:Searchables-fabric-1.16.5:1.0.0")
 }
 ```
 
-### Forge [![Maven](https://img.shields.io/maven-metadata/v?color=C71A36&label=Latest%20version&logo=Latest%20version&metadataUrl=https%3A%2F%2Fmaven.blamejared.com%2Fcom%2Fblamejared%2Fsearchables%2FSearchables-forge-1.17.1%2Fmaven-metadata.xml&style=flat-square)](https://maven.blamejared.com/com/blamejared/searchables/Searchables-forge-1.17.1/)
+### Forge [![Maven](https://img.shields.io/maven-metadata/v?color=C71A36&label=Latest%20version&logo=Latest%20version&metadataUrl=https%3A%2F%2Fmaven.blamejared.com%2Fcom%2Fblamejared%2Fsearchables%2FSearchables-forge-1.16.5%2Fmaven-metadata.xml&style=flat-square)](https://maven.blamejared.com/com/blamejared/searchables/Searchables-forge-1.16.5/)
 
 
 ```kotlin
 dependencies {
-    compileOnly(fg.deobf("com.blamejared.searchables:Searchables-forge-1.17.1:[VERSION]"))
+    compileOnly(fg.deobf("com.blamejared.searchables:Searchables-forge-1.16.5:[VERSION]"))
     // Example:
-    // implementation(fg.deobf("com.blamejared.searchables:Searchables-forge-1.17.1:1.0.0"))
+    // implementation(fg.deobf("com.blamejared.searchables:Searchables-forge-1.16.5:1.0.0"))
 }
 ```
 
-### Common [![Maven](https://img.shields.io/maven-metadata/v?color=C71A36&label=Latest%20version&logo=Latest%20version&metadataUrl=https%3A%2F%2Fmaven.blamejared.com%2Fcom%2Fblamejared%2Fsearchables%2FSearchables-common-1.17.1%2Fmaven-metadata.xml&style=flat-square)](https://maven.blamejared.com/com/blamejared/searchables/Searchables-common-1.17.1/)
+### Common [![Maven](https://img.shields.io/maven-metadata/v?color=C71A36&label=Latest%20version&logo=Latest%20version&metadataUrl=https%3A%2F%2Fmaven.blamejared.com%2Fcom%2Fblamejared%2Fsearchables%2FSearchables-common-1.16.5%2Fmaven-metadata.xml&style=flat-square)](https://maven.blamejared.com/com/blamejared/searchables/Searchables-common-1.16.5/)
 
 If you are in a multi-modloader environment (Such as [MultiLoader](https://github.com/jaredlll08/MultiLoader-Template)), you can bring the Common artifact (code that does not depend on any specific mod loader but rather just the vanilla game) into your Common project like so:
 
 ```kotlin
 dependencies {
-    compileOnly("com.blamejared.searchables:Searchables-common-1.17.1:[VERSION]")
+    compileOnly("com.blamejared.searchables:Searchables-common-1.16.5:[VERSION]")
     // Example:
-    // compileOnly("com.blamejared.searchables:Searchables-common-1.17.1:1.0.0")
+    // compileOnly("com.blamejared.searchables:Searchables-common-1.16.5:1.0.0")
 }
 ```

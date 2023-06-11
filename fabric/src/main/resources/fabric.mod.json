@@ -26,10 +26,6 @@
   },
   "mixins": [
     {
-      "config": "searchables.mixins.json",
-      "environment": "client"
-    },
-    {
       "config": "searchables.fabric.mixins.json",
       "environment": "client"
     }

@@ -13,7 +13,6 @@ plugins {
 
 mixin {
     add(sourceSets.main.get(), "${Properties.MODID}.refmap.json")
-    config("${Properties.MODID}.mixins.json")
     config("${Properties.MODID}.forge.mixins.json")
 }
 

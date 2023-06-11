@@ -1,6 +1,7 @@
 package com.blamejared.searchables.api.autcomplete;
 
-import com.blamejared.searchables.api.*;
+import com.blamejared.searchables.api.SearchableType;
+import com.blamejared.searchables.api.TokenRange;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
@@ -11,8 +12,10 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.util.Mth;
 import org.joml.Vector2d;
 
-import java.util.*;
-import java.util.function.*;
+import java.util.List;
+import java.util.Objects;
+import java.util.function.Consumer;
+import java.util.function.Supplier;
 
 /**
  * A small widget that displays current suggestions for an {@link AutoCompletingEditBox<T>}.
@@ -153,16 +156,20 @@ public class AutoComplete<T> extends AbstractWidget implements Consumer<String> 
             return;
         }
         updateHoveringState(mx, my);
-        
+        PoseStack pose = guiGraphics.pose();
+        pose.translate(0, 0, 500);
         for(int i = displayOffset; i < Math.min(displayOffset + maxSuggestions, suggestions.size()); i++) {
             CompletionSuggestion suggestion = suggestions.get(i);
             int minX = this.getX() + 2;
             int minY = this.getY() + (suggestionHeight * (i - displayOffset));
             int maxY = minY + suggestionHeight;
             boolean hovered = selectedIndex != -1 && displayOffset + selectedIndex == i;
+            
             guiGraphics.fill(this.getX(), minY, this.getX() + this.getWidth(), maxY, hovered ? 0xe0111111 : 0xe0000000);
             guiGraphics.drawString(Minecraft.getInstance().font, suggestion.display(), minX, minY + 1, hovered ? Objects.requireNonNull(ChatFormatting.YELLOW.getColor()) : 0xFFFFFFFF);
         }
+        pose.translate(0, 0, -500);
+        
         this.lastMousePosition.set(mx, my);
     }
     

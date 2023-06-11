@@ -4,6 +4,7 @@ import com.blamejared.searchables.api.*;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.AbstractWidget;
 import net.minecraft.client.gui.narration.NarrationElementOutput;
 import net.minecraft.network.chat.Component;
@@ -146,7 +147,7 @@ public class AutoComplete<T> extends AbstractWidget implements Consumer<String> 
     }
     
     @Override
-    public void renderWidget(PoseStack pose, int mx, int my, float partial) {
+    public void renderWidget(GuiGraphics guiGraphics, int mx, int my, float partial) {
         
         if(!editBox.isFocused()) {
             return;
@@ -159,8 +160,8 @@ public class AutoComplete<T> extends AbstractWidget implements Consumer<String> 
             int minY = this.getY() + (suggestionHeight * (i - displayOffset));
             int maxY = minY + suggestionHeight;
             boolean hovered = selectedIndex != -1 && displayOffset + selectedIndex == i;
-            fill(pose, this.getX(), minY, this.getX() + this.getWidth(), maxY, hovered ? 0xe0111111 : 0xe0000000);
-            Minecraft.getInstance().font.drawShadow(pose, suggestion.display(), minX, minY + 1, hovered ? Objects.requireNonNull(ChatFormatting.YELLOW.getColor()) : 0xFFFFFFFF);
+            guiGraphics.fill(this.getX(), minY, this.getX() + this.getWidth(), maxY, hovered ? 0xe0111111 : 0xe0000000);
+            guiGraphics.drawString(Minecraft.getInstance().font, suggestion.display(), minX, minY + 1, hovered ? Objects.requireNonNull(ChatFormatting.YELLOW.getColor()) : 0xFFFFFFFF);
         }
         this.lastMousePosition.set(mx, my);
     }

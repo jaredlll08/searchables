@@ -8,11 +8,6 @@ plugins {
 
 minecraft {
     version(Versions.MINECRAFT)
-    runs {
-        client("Common Client") {
-            workingDirectory(project.file("run"))
-        }
-    }
 }
 
 dependencies {

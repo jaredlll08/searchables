@@ -8,6 +8,7 @@ import java.io.IOException
 import java.util.*
 
 plugins {
+    `java`
     `java-library`
 }
 

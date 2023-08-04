@@ -5,7 +5,7 @@ import net.darkhax.curseforgegradle.TaskPublishCurseForge
 import net.darkhax.curseforgegradle.Constants as CFG_Constants
 
 plugins {
-    id("fabric-loom") version "1.1-SNAPSHOT"
+    id("fabric-loom") version "1.3-SNAPSHOT"
     id("com.blamejared.searchables.default")
     id("com.blamejared.searchables.loader")
     id("com.modrinth.minotaur")

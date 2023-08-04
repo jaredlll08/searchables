@@ -7,7 +7,7 @@ import net.darkhax.curseforgegradle.Constants as CFG_Constants
 plugins {
     id("com.blamejared.searchables.default")
     id("com.blamejared.searchables.loader")
-    id("net.minecraftforge.gradle") version ("5.1.+")
+    id("net.minecraftforge.gradle") version ("[6.0,6.2)")
     id("org.spongepowered.mixin") version ("0.7-SNAPSHOT")
     id("com.modrinth.minotaur")
 }
@@ -25,7 +25,7 @@ minecraft {
             taskName("Client")
             workingDirectory(project.file("run"))
             ideaModule("${rootProject.name}.${project.name}.main")
-            args("-mixin.config=${Properties.MODID}.mixins.json")
+            args("-mixin.config=${Properties.MODID}.forge.mixins.json")
             mods {
                 create(Properties.MODID) {
                     source(sourceSets.main.get())

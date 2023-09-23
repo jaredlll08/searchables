@@ -92,7 +92,7 @@ public class AutoCompletingEditBox<T> extends EditBox {
                 String newValue = range.delete(this.getValue());
                 if(this.getFilter().test(newValue)) {
                     this.setValue(newValue);
-                    this.moveCursorTo(range.start());
+                    this.moveCursorTo(range.start(), false);
                 }
             }
         }

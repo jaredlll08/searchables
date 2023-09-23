@@ -111,11 +111,12 @@ public class AutoComplete<T> extends AbstractWidget implements Consumer<String> 
         return super.isMouseOver(xpos, ypos) && ypos < this.getY() + (suggestionHeight * shownSuggestions());
     }
     
+    
     @Override
-    public boolean mouseScrolled(double xpos, double ypos, double delta) {
+    public boolean mouseScrolled(double xpos, double ypos, double xDelta, double yDelta) {
         
         if(isMouseOver(xpos, ypos) || this.editBox().isMouseOver(xpos, ypos)) {
-            displayOffset = (int) Mth.clamp(displayOffset - delta, 0, Math.max(this.suggestions.size() - maxSuggestions, 0));
+            displayOffset = (int) Mth.clamp(displayOffset - yDelta, 0, Math.max(this.suggestions.size() - maxSuggestions, 0));
             lastMousePosition.set(0);
             return true;
         }

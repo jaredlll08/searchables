@@ -80,13 +80,13 @@ public class MyScreen extends Screen {
                 TestConstants.SHAPE, // The SearchableType that will be searched
                 () -> TestConstants.SHAPES)); // Supplier for the elements - used for auto complete
         this.search.addResponder(this::filter); // Adds a responder to the search to filter the elements on every change in the EditBox
-        this.addRenderableOnly(this.search.autoComplete()); // Add the autocomplete widget as a renderable only
     }
-    
+
     @Override
-    public void tick() {
-        super.tick();
-        this.search.tick(); // Assists rendering the EditBox's cursor
+    public void render(GuiGraphics guiGraphics, int mxPos, int myPos, float partialTicks) {
+
+        super.render(guiGraphics, mxPos, myPos, partialTicks);
+        this.search.autoComplete().render(guiGraphics, mxPos, myPos, partialTicks); // Render the autocomplete above other elements
     }
     
     @Override

@@ -273,22 +273,22 @@ public final class TokenRange implements Comparable<TokenRange>, Iterable<TokenR
         if(this.subRanges().isEmpty()) {
             return this;
         }
-        int start = this.subRanges()
+        int rangeStart = this.subRanges()
                 .stream()
                 .min(Comparator.comparing(TokenRange::end))
                 .map(TokenRange::start)
                 .orElse(this.start());
-        int end = this.subRanges()
+        int rangeEnd = this.subRanges()
                 .stream()
                 .max(Comparator.comparing(TokenRange::end))
                 .map(TokenRange::end)
                 .orElse(this.end());
         
-        if(start == this.start() && end == this.end()) {
+        if(rangeStart == this.start() && rangeEnd == this.end()) {
             return this;
         }
         
-        TokenRange newRange = TokenRange.between(start, end);
+        TokenRange newRange = TokenRange.between(rangeStart, rangeEnd);
         newRange.subRanges().addAll(this.subRanges());
         return newRange;
     }

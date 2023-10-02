@@ -2,6 +2,8 @@ package com.blamejared.searchables.tests;
 
 import com.blamejared.searchables.TestConstants;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.List;
 
@@ -12,24 +14,11 @@ import static org.hamcrest.Matchers.hasSize;
 
 public class SearchTest {
     
-    @Test
-    public void testNoResultsDefaultSearch() {
-        
-        List<TestConstants.Shape> shapes = TestConstants.SHAPE.filterEntries(TestConstants.SHAPES, "negative");
-        assertThat(shapes, empty());
-    }
+    @ParameterizedTest
+    @ValueSource(strings = {"negative", "name:invalid", "name:invalid type:square colour:blue"})
+    public void testNoResults(String query) {
     
-    @Test
-    public void testNoResultsComponentSearch() {
-        
-        List<TestConstants.Shape> shapes = TestConstants.SHAPE.filterEntries(TestConstants.SHAPES, "name:invalid");
-        assertThat(shapes, empty());
-    }
-    
-    @Test
-    public void testNoResultsFullSearch() {
-        
-        List<TestConstants.Shape> shapes = TestConstants.SHAPE.filterEntries(TestConstants.SHAPES, "name:invalid type:square colour:blue");
+        List<TestConstants.Shape> shapes = TestConstants.SHAPE.filterEntries(TestConstants.SHAPES, query);
         assertThat(shapes, empty());
     }
     

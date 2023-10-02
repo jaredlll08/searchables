@@ -37,18 +37,15 @@ public class CompletionVisitor implements Visitor<TokenRange>, Consumer<String> 
     protected void reduceTokens() {
         // Can this be done while visiting?
         ListIterator<TokenRange> iterator = tokens.listIterator(tokens.size());
-        TokenRange lastRange = null;
+        TokenRange last = null;
         while(iterator.hasPrevious()) {
             TokenRange previous = iterator.previous();
-            if(lastRange == null) {
-                lastRange = previous;
-            } else {
-                if(lastRange.covers(previous)) {
-                    lastRange.addRange(previous);
-                    iterator.remove();
-                } else {
-                    lastRange = previous;
-                }
+            if (last != null && last.covers(previous)) {
+                last.addRange(previous);
+                iterator.remove();
+            }
+            else {
+                last = previous;
             }
         }
     }

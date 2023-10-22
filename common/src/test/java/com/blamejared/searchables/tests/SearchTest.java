@@ -1,6 +1,8 @@
 package com.blamejared.searchables.tests;
 
 import com.blamejared.searchables.TestConstants;
+import com.blamejared.searchables.api.TokenRange;
+import com.blamejared.searchables.api.autcomplete.CompletionVisitor;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -105,6 +107,14 @@ public class SearchTest {
         
         List<TestConstants.Shape> shapes = TestConstants.SHAPE.filterEntries(TestConstants.SHAPES, "name: colour:red");
         assertThat(shapes, contains(TestConstants.Shapes.ONE, TestConstants.Shapes.FIVE, TestConstants.Shapes.NINE));
+    }
+    
+    @Test
+    public void testQuotes() {
+        
+        String search = "name:`on`a";
+        List<TestConstants.Shape> shapes = TestConstants.SHAPE.filterEntries(TestConstants.SHAPES, search);
+        assertThat(shapes, contains(TestConstants.SHAPES.toArray(TestConstants.Shape[]::new)));
     }
     
 }

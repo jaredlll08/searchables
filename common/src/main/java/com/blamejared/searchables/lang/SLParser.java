@@ -68,7 +68,11 @@ public class SLParser {
         
         if(match(TokenType.STRING)) {
             Token previous = previous();
-            return new LiteralExpression(previous.literal(), previous.lexeme());
+            LiteralExpression literalExpression = new LiteralExpression(previous.literal(), previous.lexeme());
+            if(!check(TokenType.SPACE) && !isAtEnd()) {
+                return new PairedExpression(literalExpression, expression());
+            }
+            return literalExpression;
         }
         
         return new LiteralExpression("", "");

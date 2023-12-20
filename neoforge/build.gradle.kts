@@ -44,5 +44,6 @@ modrinth {
     changelog.set(GMUtils.smallChangelog(project, Properties.GIT_REPO))
     versionName.set("NeoForge-${Versions.MINECRAFT}-$version")
     versionType.set("release")
+    gameVersions.set(listOf(Versions.MINECRAFT))
     uploadFile.set(tasks.jar.get())
 }

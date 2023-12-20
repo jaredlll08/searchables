@@ -1,6 +1,7 @@
 pluginManagement {
     repositories {
         maven("https://maven.blamejared.com")
+        maven("https://maven.neoforged.net/releases")
         gradlePluginPortal()
         maven("https://maven.fabricmc.net/") {
             name = "Fabric"
@@ -17,3 +18,4 @@ rootProject.name = "searchables"
 include("common")
 include("fabric")
 include("forge")
+include("neoforge")

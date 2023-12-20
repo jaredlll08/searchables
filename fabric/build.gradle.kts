@@ -55,6 +55,7 @@ modrinth {
     changelog.set(GMUtils.smallChangelog(project, Properties.GIT_REPO))
     versionName.set("Fabric-${Versions.MINECRAFT}-$version")
     versionType.set("release")
+    gameVersions.set(listOf(Versions.MINECRAFT))
     uploadFile.set(tasks.remapJar.get())
     dependencies {
         required.project("fabric-api")

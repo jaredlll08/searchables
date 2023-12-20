@@ -32,6 +32,7 @@ tasks.create<TaskPublishCurseForge>("publishCurseForge") {
     mainFile.changelog = GMUtils.smallChangelog(project, Properties.GIT_REPO)
     mainFile.releaseType = Constants.RELEASE_TYPE_RELEASE
     mainFile.addJavaVersion("Java ${Versions.JAVA}")
+    mainFile.addGameVersion(Versions.MINECRAFT)
 
     doLast {
         project.ext.set("curse_file_url", "${Properties.CURSE_HOMEPAGE}/files/${mainFile.curseFileId}")

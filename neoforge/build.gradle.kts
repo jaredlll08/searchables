@@ -34,6 +34,7 @@ tasks.create<TaskPublishCurseForge>("publishCurseForge") {
     mainFile.releaseType = Constants.RELEASE_TYPE_RELEASE
     mainFile.addJavaVersion("Java ${Versions.JAVA}")
     mainFile.addGameVersion(Versions.MINECRAFT)
+    mainFile.addModLoader("NeoForge")
 
     doLast {
         project.ext.set("curse_file_url", "${Properties.CURSE_HOMEPAGE}/files/${mainFile.curseFileId}")

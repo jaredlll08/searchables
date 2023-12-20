@@ -44,6 +44,7 @@ dependencies {
 }
 
 tasks.create<TaskPublishCurseForge>("publishCurseForge") {
+    dependsOn(tasks.jar)
     apiToken = GMUtils.locateProperty(project, "curseforgeApiToken") ?: 0
 
     val mainFile = upload(Properties.CURSE_PROJECT_ID, file("${project.buildDir}/libs/${base.archivesName.get()}-$version.jar"))
@@ -67,3 +68,4 @@ modrinth {
     gameVersions.set(listOf(Versions.MINECRAFT))
     uploadFile.set(tasks.jar.get())
 }
+tasks.modrinth.get().dependsOn(tasks.jar)

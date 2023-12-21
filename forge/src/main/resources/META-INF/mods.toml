@@ -5,7 +5,7 @@ license = "MIT"
 [[mods]]
 modId = "${MODID}"
 updateJSONURL = "https://updates.blamejared.com/get?n=${MODID}&gv=${MINECRAFT}&ml=forge"
-version = "${MOD}"
+version = "${version}"
 displayName = "${NAME}"
 displayURL = "${CURSE_HOMEPAGE}"
 authors = "${AUTHOR}"

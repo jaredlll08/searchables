@@ -102,8 +102,8 @@ class DefaultPlugin : Plugin<Project> {
 
             @Suppress("UnstableApiUsage")
             withType<ProcessResources> {
-                inputs.property("version", project.version)
                 val properties = mapOf(
+                        "version" to project.version,
                         "MOD" to Versions.MOD,
                         "JAVA" to Versions.JAVA,
                         "MINECRAFT" to Versions.MINECRAFT,

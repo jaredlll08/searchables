@@ -16,8 +16,8 @@ version = GMUtils.updatingVersion(Versions.MOD)
 
 tasks.create("postDiscord") {
     val taskName = "publishCurseForge"
+    dependsOn(":fabric:${taskName}", ":forge:${taskName}", ":neoforge:${taskName}")
     doLast {
-        dependsOn(project(":fabric").tasks.getByName(taskName), project(":forge").tasks.getByName(taskName), project(":neoforge").tasks.getByName(taskName))
         try {
 
             // Create a new webhook instance for Discord

@@ -47,7 +47,7 @@ tasks.create<TaskPublishCurseForge>("publishCurseForge") {
     dependsOn(tasks.jar)
     apiToken = GMUtils.locateProperty(project, "curseforgeApiToken") ?: 0
 
-    val mainFile = upload(Properties.CURSE_PROJECT_ID, file("${project.buildDir}/libs/${base.archivesName.get()}-$version.jar"))
+    val mainFile = upload(Properties.CURSE_PROJECT_ID, file("${project.layout.buildDirectory}/libs/${base.archivesName.get()}-$version.jar"))
     mainFile.changelogType = "markdown"
     mainFile.changelog = GMUtils.smallChangelog(project, Properties.GIT_REPO)
     mainFile.releaseType = CFG_Constants.RELEASE_TYPE_RELEASE

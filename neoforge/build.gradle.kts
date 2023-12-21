@@ -7,7 +7,7 @@ import net.darkhax.curseforgegradle.TaskPublishCurseForge
 plugins {
     id("com.blamejared.searchables.default")
     id("com.blamejared.searchables.loader")
-    id("net.neoforged.gradle.userdev") version ("7.0.41")
+    id("net.neoforged.gradle.userdev") version ("7.0.71")
     id("com.modrinth.minotaur")
 }
 
@@ -28,7 +28,7 @@ tasks.create<TaskPublishCurseForge>("publishCurseForge") {
     dependsOn(tasks.jar)
     apiToken = GMUtils.locateProperty(project, "curseforgeApiToken") ?: 0
 
-    val mainFile = upload(Properties.CURSE_PROJECT_ID, file("${project.buildDir}/libs/${base.archivesName.get()}-$version.jar"))
+    val mainFile = upload(Properties.CURSE_PROJECT_ID, file("${project.layout.buildDirectory}/libs/${base.archivesName.get()}-$version.jar"))
     mainFile.changelogType = "markdown"
     mainFile.changelog = GMUtils.smallChangelog(project, Properties.GIT_REPO)
     mainFile.releaseType = Constants.RELEASE_TYPE_RELEASE

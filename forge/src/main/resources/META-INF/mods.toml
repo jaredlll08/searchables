@@ -17,10 +17,10 @@ modId = "forge"
 mandatory = true
 versionRange = "${FORGE_LOADER}"
 ordering = "NONE"
-side="BOTH"
+side = "BOTH"
 [[dependencies.${MODID}]]
 modId = "minecraft"
 mandatory = true
 versionRange = "[${MINECRAFT}]"
 ordering = "NONE"
-side="BOTH"
+side = "BOTH"

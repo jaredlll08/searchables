@@ -100,7 +100,6 @@ class DefaultPlugin : Plugin<Project> {
                 }
             }
 
-            @Suppress("UnstableApiUsage")
             withType<ProcessResources> {
                 val properties = mapOf(
                         "version" to project.version,

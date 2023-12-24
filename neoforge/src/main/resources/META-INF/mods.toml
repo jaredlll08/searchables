@@ -12,6 +12,10 @@ authors = "${AUTHOR}"
 logoFile = "icon.png"
 description = '''${DESCRIPTION}'''
 itemIcon = "${ITEM_ICON}"
+[[mixins]]
+config = "${MODID}.mixins.json"
+[[mixins]]
+config = "${MODID}.neoforge.mixins.json"
 [[dependencies.${MODID}]]
 modId = "neoforge"
 mandatory = true

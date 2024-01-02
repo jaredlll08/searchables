@@ -13,7 +13,7 @@ public interface AccessTextFieldWidget {
     
     @Accessor("filter")
     Predicate<String> searchables$getFilter();
-    
+
     @Nullable
     @Accessor("responder")
     Consumer<String> searchables$getResponder();

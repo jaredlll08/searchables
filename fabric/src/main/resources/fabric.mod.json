@@ -13,6 +13,11 @@
     "issues": "${GIT_REPO}/issues"
   },
   "description": "${DESCRIPTION}",
+  "custom": {
+    "modmenu": {
+      "badges": [ "library" ]
+    }
+  },
   "entrypoints": {
   },
   "depends": {

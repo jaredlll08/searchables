@@ -49,6 +49,9 @@ public final class SearchableType<T> {
         
         final TokenRange suggestionRange = replacementRange.rangeAtPosition(position);
         final String suggestionFrom = suggestionRange.substring(currentToken, position);
+        if(!replacementRange.contains(position)) {
+            return List.of();
+        }
         final int suggestionIndex = replacementRange.rangeIndexAtPosition(position);
         return switch(suggestionIndex) {
             case 0 -> getSuggestionsForComponent(

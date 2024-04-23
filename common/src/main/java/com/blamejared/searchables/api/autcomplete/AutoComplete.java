@@ -8,6 +8,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.AbstractWidget;
 import net.minecraft.client.gui.narration.NarrationElementOutput;
+import net.minecraft.client.renderer.RenderType;
 import net.minecraft.network.chat.Component;
 import net.minecraft.util.Mth;
 import org.joml.Vector2d;
@@ -156,8 +157,6 @@ public class AutoComplete<T> extends AbstractWidget implements Consumer<String> 
             return;
         }
         updateHoveringState(mx, my);
-        PoseStack pose = guiGraphics.pose();
-        pose.translate(0, 0, 500);
         for(int i = displayOffset; i < Math.min(displayOffset + maxSuggestions, suggestions.size()); i++) {
             CompletionSuggestion suggestion = suggestions.get(i);
             int minX = this.getX() + 2;
@@ -165,10 +164,9 @@ public class AutoComplete<T> extends AbstractWidget implements Consumer<String> 
             int maxY = minY + suggestionHeight;
             boolean hovered = selectedIndex != -1 && displayOffset + selectedIndex == i;
             
-            guiGraphics.fill(this.getX(), minY, this.getX() + this.getWidth(), maxY, hovered ? 0xe0111111 : 0xe0000000);
+            guiGraphics.fill(RenderType.guiOverlay(), this.getX(), minY, this.getX() + this.getWidth(), maxY, hovered ? 0xe0111111 : 0xe0000000);
             guiGraphics.drawString(Minecraft.getInstance().font, suggestion.display(), minX, minY + 1, hovered ? Objects.requireNonNull(ChatFormatting.YELLOW.getColor()) : 0xFFFFFFFF);
         }
-        pose.translate(0, 0, -500);
         
         this.lastMousePosition.set(mx, my);
     }

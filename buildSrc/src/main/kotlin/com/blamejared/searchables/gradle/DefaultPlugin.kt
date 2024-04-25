@@ -14,7 +14,6 @@ import org.gradle.api.plugins.JavaPluginExtension
 import org.gradle.api.publish.PublishingExtension
 import org.gradle.api.publish.maven.MavenPublication
 import org.gradle.api.publish.maven.plugins.MavenPublishPlugin
-import org.gradle.api.publish.tasks.GenerateModuleMetadata
 import org.gradle.api.tasks.compile.JavaCompile
 import org.gradle.api.tasks.javadoc.Javadoc
 import org.gradle.external.javadoc.StandardJavadocDocletOptions
@@ -25,7 +24,6 @@ import org.gradle.language.jvm.tasks.ProcessResources
 import org.gradle.plugins.ide.idea.IdeaPlugin
 import org.gradle.plugins.ide.idea.model.IdeaModel
 import java.nio.charset.StandardCharsets
-import java.text.SimpleDateFormat
 import java.util.*
 
 class DefaultPlugin : Plugin<Project> {
@@ -46,10 +44,6 @@ class DefaultPlugin : Plugin<Project> {
         project.version = GMUtils.updatingVersion(Versions.MOD)
         project.group = Properties.GROUP
 
-        project.tasks.withType<GenerateModuleMetadata>().all {
-            enabled = false
-        }
-
         project.repositories {
             this.add(mavenCentral())
             this.add(this.maven("https://repo.spongepowered.org/repository/maven-public/") {
@@ -66,7 +60,7 @@ class DefaultPlugin : Plugin<Project> {
         project.plugins.apply(JavaLibraryPlugin::class.java)
 
         with(project.extensions.getByType(JavaPluginExtension::class.java)) {
-            toolchain.languageVersion.set(JavaLanguageVersion.of(JavaVersion.VERSION_17.majorVersion))
+            toolchain.languageVersion.set(JavaLanguageVersion.of(JavaVersion.VERSION_21.majorVersion))
             withSourcesJar()
             withJavadocJar()
             sourceSets {
@@ -125,11 +119,8 @@ class DefaultPlugin : Plugin<Project> {
                         "ITEM_ICON" to Properties.ITEM_ICON,
                 )
                 inputs.properties(properties)
-                filesMatching(setOf("fabric.mod.json", "META-INF/mods.toml", "pack.mcmeta")) {
+                filesMatching(setOf("fabric.mod.json", "META-INF/mods.toml","META-INF/neoforge.mods.toml", "pack.mcmeta")) {
                     expand(properties)
-                }
-                filesMatching("fabric.mod.json") {
-                    expand("version" to project.version)
                 }
             }
 
@@ -141,9 +132,6 @@ class DefaultPlugin : Plugin<Project> {
                     attributes["Implementation-Title"] = project.name
                     attributes["Implementation-Version"] = archiveVersion
                     attributes["Implementation-Vendor"] = Properties.AUTHOR
-                    attributes["Implementation-Timestamp"] = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ").format(Date())
-                    attributes["Timestamp"] = System.currentTimeMillis()
-                    attributes["Built-On-Java"] = "${System.getProperty("java.vm.version")} (${System.getProperty("java.vm.vendor")})"
                     attributes["Built-On-Minecraft"] = Versions.MINECRAFT
                 }
             }

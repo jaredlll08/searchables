@@ -26,7 +26,7 @@
     "minecraft": "${MINECRAFT}"
   },
   "recommends": {
-    "fabric": "*"
+    "fabric-api": "*"
   },
   "mixins": [
     {

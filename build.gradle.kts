@@ -16,7 +16,7 @@ version = GMUtils.updatingVersion(Versions.MOD)
 
 tasks.create("postDiscord") {
     val taskName = "publishCurseForge"
-    dependsOn(":fabric:${taskName}",/* ":forge:${taskName}",*/ ":neoforge:${taskName}")
+    dependsOn(":fabric:${taskName}", ":forge:${taskName}", ":neoforge:${taskName}")
     doLast {
         try {
 
@@ -32,7 +32,7 @@ tasks.create("postDiscord") {
             val embed = Embed()
             val downloadSources = StringJoiner("\n")
 
-            mapOf(Pair("fabric", "<:fabric:932163720568782878>"), /*Pair("forge", "<:forge:932163698003443804>"),*/ Pair("neoforge", "<:neoforged:1184738260371644446>"))
+            mapOf(Pair("fabric", "<:fabric:932163720568782878>"), Pair("forge", "<:forge:932163698003443804>"), Pair("neoforge", "<:neoforged:1184738260371644446>"))
                     .filter {
                         project(":${it.key}").ext.has("curse_file_url")
                     }.map { "${it.value} [${it.key.capitalize(Locale.ENGLISH)}](${project(":${it.key}").ext.get("curse_file_url")})" }

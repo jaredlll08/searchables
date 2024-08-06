@@ -74,3 +74,11 @@ modrinth {
     loaders.add("forge")
 }
 tasks.modrinth.get().dependsOn(tasks.jar)
+
+publishing {
+    publications {
+        named("mavenJava", MavenPublication::class) {
+            fg.component(this)
+        }
+    }
+}

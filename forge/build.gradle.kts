@@ -2,6 +2,7 @@ import com.blamejared.Properties
 import com.blamejared.Versions
 import com.blamejared.gradle.mod.utils.GMUtils
 import net.darkhax.curseforgegradle.TaskPublishCurseForge
+import org.gradle.jvm.tasks.Jar
 import net.darkhax.curseforgegradle.Constants as CFG_Constants
 
 plugins {
@@ -75,6 +76,13 @@ modrinth {
 }
 tasks.modrinth.get().dependsOn(tasks.jar)
 
+tasks {
+    named<Jar>("jar").configure {
+        manifest {
+            attributes["MixinConfigs"] = "searchables.mixins.json"
+        }
+    }
+}
 publishing {
     publications {
         named("mavenJava", MavenPublication::class) {

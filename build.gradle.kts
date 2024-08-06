@@ -38,7 +38,7 @@ tasks.create("postDiscord") {
                     }.map { "${it.value} [${it.key.capitalize(Locale.ENGLISH)}](${project(":${it.key}").ext.get("curse_file_url")})" }
                     .forEach { downloadSources.add(it) }
 
-            listOf("common", "fabric", /*"forge",*/ "neoforge")
+            listOf("common", "fabric", "forge", "neoforge")
                     .map { project(":${it}") }
                     .map { "<:maven:932165250738970634> `\"${it.group}:${it.base.archivesName.get()}:${it.version}\"`" }
                     .forEach { downloadSources.add(it) }

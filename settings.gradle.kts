@@ -17,5 +17,5 @@ plugins {
 rootProject.name = "searchables"
 include("common")
 include("fabric")
-//include("forge")
+include("forge")
 include("neoforge")

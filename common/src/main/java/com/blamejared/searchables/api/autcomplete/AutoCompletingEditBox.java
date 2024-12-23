@@ -40,6 +40,12 @@ public class AutoCompletingEditBox<T> extends EditBox {
     }
     
     @Override
+    public boolean isMouseOver(double xpos, double ypos) {
+        
+        return super.isMouseOver(xpos, ypos) || this.autoComplete.isMouseOver(xpos, ypos);
+    }
+    
+    @Override
     public boolean mouseClicked(double xpos, double ypos, int button) {
         
         if(this.isFocused() && autoComplete.mouseClicked(xpos, ypos, button)) {

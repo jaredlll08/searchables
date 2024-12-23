@@ -98,19 +98,11 @@ public class AutoComplete<T> extends AbstractWidget implements Consumer<String> 
         lastCursorPosition = position;
     }
     
-    // For some reason mojang has these as 2 methods...
-    @Override
-    protected boolean clicked(double xpos, double ypos) {
-        
-        return super.clicked(xpos, ypos) && ypos < this.getY() + (suggestionHeight * shownSuggestions());
-    }
-    
     @Override
     public boolean isMouseOver(double xpos, double ypos) {
         
         return super.isMouseOver(xpos, ypos) && ypos < this.getY() + (suggestionHeight * shownSuggestions());
     }
-    
     
     @Override
     public boolean mouseScrolled(double xpos, double ypos, double xDelta, double yDelta) {

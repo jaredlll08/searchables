@@ -1,3 +1,4 @@
 {
-  "options.search": "Arama"
+  "modmenu.descriptionTranslation.searchables": "Otomatik tamamlama ve arama türleri ile arama çubukları eklemeyi kolaylaştırmak için kütüphane modu.",
+  "options.search": "Ara"
 }

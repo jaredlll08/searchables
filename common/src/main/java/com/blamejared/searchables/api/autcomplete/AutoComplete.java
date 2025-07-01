@@ -7,8 +7,8 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.AbstractWidget;
 import net.minecraft.client.gui.narration.NarrationElementOutput;
-import net.minecraft.client.renderer.RenderType;
 import net.minecraft.network.chat.Component;
+import net.minecraft.util.ARGB;
 import net.minecraft.util.Mth;
 import org.joml.Vector2d;
 
@@ -157,7 +157,7 @@ public class AutoComplete<T> extends AbstractWidget implements Consumer<String> 
             boolean hovered = selectedIndex != -1 && displayOffset + selectedIndex == i;
             
             guiGraphics.fill(this.getX(), minY, this.getX() + this.getWidth(), maxY, hovered ? 0xe0111111 : 0xe0000000);
-            guiGraphics.drawString(Minecraft.getInstance().font, suggestion.display(), minX, minY + 1, hovered ? Objects.requireNonNull(ChatFormatting.YELLOW.getColor()) : 0xFFFFFFFF);
+            guiGraphics.drawString(Minecraft.getInstance().font, suggestion.display(), minX, minY + 1, hovered ? ARGB.opaque(Objects.requireNonNull(ChatFormatting.YELLOW.getColor())) : 0xFFFFFFFF);
         }
         this.lastMousePosition.set(mx, my);
     }

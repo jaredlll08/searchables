@@ -156,7 +156,7 @@ public class AutoComplete<T> extends AbstractWidget implements Consumer<String> 
             int maxY = minY + suggestionHeight;
             boolean hovered = selectedIndex != -1 && displayOffset + selectedIndex == i;
             
-            guiGraphics.fill(RenderType.guiOverlay(), this.getX(), minY, this.getX() + this.getWidth(), maxY, hovered ? 0xe0111111 : 0xe0000000);
+            guiGraphics.fill(this.getX(), minY, this.getX() + this.getWidth(), maxY, hovered ? 0xe0111111 : 0xe0000000);
             guiGraphics.drawString(Minecraft.getInstance().font, suggestion.display(), minX, minY + 1, hovered ? Objects.requireNonNull(ChatFormatting.YELLOW.getColor()) : 0xFFFFFFFF);
         }
         this.lastMousePosition.set(mx, my);

@@ -1,16 +1,23 @@
 package com.blamejared.searchables.api.autcomplete;
 
-import com.blamejared.searchables.api.*;
+import com.blamejared.searchables.api.SearchableType;
+import com.blamejared.searchables.api.SearchablesConstants;
+import com.blamejared.searchables.api.TokenRange;
 import com.blamejared.searchables.api.formatter.FormattingVisitor;
 import com.blamejared.searchables.mixin.AccessEditBox;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.components.EditBox;
+import net.minecraft.client.input.KeyEvent;
+import net.minecraft.client.input.MouseButtonEvent;
 import net.minecraft.network.chat.Component;
 import org.jetbrains.annotations.Nullable;
 import org.lwjgl.glfw.GLFW;
 
-import java.util.*;
-import java.util.function.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.function.Consumer;
+import java.util.function.Predicate;
+import java.util.function.Supplier;
 
 public class AutoCompletingEditBox<T> extends EditBox {
     
@@ -32,7 +39,7 @@ public class AutoCompletingEditBox<T> extends EditBox {
         this.completionVisitor = new CompletionVisitor();
         this.autoComplete = new AutoComplete<>(type, this, entries, x, y + 2 + height, width, font.lineHeight + 2);
         setHint(SearchablesConstants.COMPONENT_SEARCH);
-        this.setFormatter(this.formattingVisitor);
+        this.addFormatter(this.formattingVisitor);
         this.setResponder(this.responders);
         addResponder(this.formattingVisitor);
         addResponder(this.completionVisitor);
@@ -46,44 +53,43 @@ public class AutoCompletingEditBox<T> extends EditBox {
     }
     
     @Override
-    public boolean mouseClicked(double xpos, double ypos, int button) {
+    public boolean mouseClicked(MouseButtonEvent event, boolean doubleClick) {
         
-        if(this.isFocused() && autoComplete.mouseClicked(xpos, ypos, button)) {
+        if(this.isFocused() && autoComplete.mouseClicked(event, doubleClick)) {
             return true;
         }
-        if((isMouseOver(xpos, ypos) || autoComplete().isMouseOver(xpos, ypos)) && button == GLFW.GLFW_MOUSE_BUTTON_2) {
+        if((isMouseOver(event.x(), event.y()) || autoComplete().isMouseOver(event.x(), event.y())) && event.buttonInfo()
+                .isRight()) {
             this.setValue("");
             return true;
         }
-        return super.mouseClicked(xpos, ypos, button);
+        return super.mouseClicked(event, doubleClick);
     }
     
     @Override
-    public boolean keyPressed(int key, int scancode, int mods) {
+    public boolean keyPressed(KeyEvent event) {
         
-        switch(key) {
-            case (GLFW.GLFW_KEY_PAGE_DOWN) -> {
-                this.autoComplete.scrollDown(this.autoComplete().maxSuggestions());
-                return true;
-            }
-            case (GLFW.GLFW_KEY_DOWN) -> {
-                this.autoComplete().scrollDown();
-                return true;
-            }
-            case (GLFW.GLFW_KEY_PAGE_UP) -> {
-                this.autoComplete.scrollUp(this.autoComplete().maxSuggestions());
-                return true;
-            }
-            case (GLFW.GLFW_KEY_UP) -> {
-                this.autoComplete().scrollUp();
-                return true;
-            }
-            case (GLFW.GLFW_KEY_ENTER) -> {
-                this.autoComplete().insertSuggestion();
-                return true;
-            }
+        if(event.isUp()) {
+            this.autoComplete().scrollUp();
+            return true;
         }
-        return super.keyPressed(key, scancode, mods);
+        if(event.isDown()) {
+            this.autoComplete().scrollDown();
+            return true;
+        }
+        if(event.isConfirmation()) {
+            this.autoComplete().insertSuggestion();
+            return true;
+        }
+        if(event.key() == GLFW.GLFW_KEY_PAGE_DOWN) {
+            this.autoComplete.scrollDown(this.autoComplete().maxSuggestions());
+            return true;
+        }
+        if(event.key() == GLFW.GLFW_KEY_PAGE_UP) {
+            this.autoComplete.scrollUp(this.autoComplete().maxSuggestions());
+            return true;
+        }
+        return super.keyPressed(event);
     }
     
     /**

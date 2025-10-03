@@ -1,20 +1,28 @@
 package com.blamejared.searchables.api.formatter;
 
-import com.blamejared.searchables.api.*;
+import com.blamejared.searchables.api.SearchableType;
+import com.blamejared.searchables.api.TokenRange;
 import com.blamejared.searchables.lang.StringSearcher;
-import com.blamejared.searchables.lang.expression.type.*;
+import com.blamejared.searchables.lang.expression.type.ComponentExpression;
+import com.blamejared.searchables.lang.expression.type.GroupingExpression;
+import com.blamejared.searchables.lang.expression.type.LiteralExpression;
+import com.blamejared.searchables.lang.expression.type.PairedExpression;
 import com.blamejared.searchables.lang.expression.visitor.ContextAwareVisitor;
 import com.mojang.datafixers.util.Pair;
+import net.minecraft.client.gui.components.EditBox;
 import net.minecraft.network.chat.Style;
 import net.minecraft.util.FormattedCharSequence;
+import org.jetbrains.annotations.Nullable;
 
-import java.util.*;
-import java.util.function.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+import java.util.function.Consumer;
 
 /**
- * Applies style formatting for an {@link net.minecraft.client.gui.components.EditBox}, intended to be passed into {@link net.minecraft.client.gui.components.EditBox#setFormatter(BiFunction)}.
+ * Applies style formatting for an {@link net.minecraft.client.gui.components.EditBox}, intended to be passed into {@link net.minecraft.client.gui.components.EditBox#addFormatter(EditBox.TextFormatter)}}.
  */
-public class FormattingVisitor implements ContextAwareVisitor<TokenRange, FormattingContext>, Consumer<String>, BiFunction<String, Integer, FormattedCharSequence> {
+public class FormattingVisitor implements ContextAwareVisitor<TokenRange, FormattingContext>, Consumer<String>, EditBox.TextFormatter {
     
     private final SearchableType<?> type;
     
@@ -113,7 +121,7 @@ public class FormattingVisitor implements ContextAwareVisitor<TokenRange, Format
     }
     
     @Override
-    public FormattedCharSequence apply(final String currentString, final Integer offset) {
+    public @Nullable FormattedCharSequence format(final String currentString, final int offset) {
         
         List<FormattedCharSequence> sequences = new ArrayList<>();
         int index = 0;

@@ -7,6 +7,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.AbstractWidget;
 import net.minecraft.client.gui.narration.NarrationElementOutput;
+import net.minecraft.client.input.MouseButtonEvent;
 import net.minecraft.network.chat.Component;
 import net.minecraft.util.ARGB;
 import net.minecraft.util.Mth;
@@ -123,19 +124,21 @@ public class AutoComplete<T> extends AbstractWidget implements Consumer<String> 
     }
     
     @Override
-    public boolean mouseClicked(double mx, double my, int mb) {
+    public boolean mouseClicked(MouseButtonEvent event, boolean doubleClick) {
+        
         if(!editBox.isFocused()) {
             return false;
         }
         
-        if(super.mouseClicked(mx, my, mb)) {
-            updateHoveringState(mx, my);
+        if(super.mouseClicked(event, doubleClick)) {
+            updateHoveringState(event.x(), event.y());
             if(selectedIndex != -1) {
                 insertSuggestion();
             }
             return true;
         }
-        return false;
+        
+        return super.mouseClicked(event, doubleClick);
     }
     
     /**

@@ -58,8 +58,7 @@ public class AutoCompletingEditBox<T> extends EditBox {
         if(this.isFocused() && autoComplete.mouseClicked(event, doubleClick)) {
             return true;
         }
-        if((isMouseOver(event.x(), event.y()) || autoComplete().isMouseOver(event.x(), event.y())) && event.buttonInfo()
-                .isRight()) {
+        if((isMouseOver(event.x(), event.y()) || autoComplete().isMouseOver(event.x(), event.y())) && event.button() == GLFW.GLFW_MOUSE_BUTTON_RIGHT) {
             this.setValue("");
             return true;
         }

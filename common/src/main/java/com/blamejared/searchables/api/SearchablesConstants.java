@@ -1,8 +1,8 @@
 package com.blamejared.searchables.api;
 
-import net.minecraft.Util;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
+import net.minecraft.util.Util;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.function.Function;
@@ -44,9 +44,9 @@ public class SearchablesConstants {
         return StringUtils.wrap(s, quoteChar);
     });
     
-    public static ResourceLocation rl(final String path) {
+    public static Identifier id(final String path) {
         
-        return ResourceLocation.fromNamespaceAndPath(MOD_ID, path);
+        return Identifier.fromNamespaceAndPath(MOD_ID, path);
     }
     
 }

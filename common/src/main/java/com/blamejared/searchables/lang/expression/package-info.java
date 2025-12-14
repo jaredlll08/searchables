@@ -3,8 +3,7 @@
 @FieldsAreNonnullByDefault
 package com.blamejared.searchables.lang.expression;
 
-
-import net.minecraft.FieldsAreNonnullByDefault;
-import net.minecraft.MethodsReturnNonnullByDefault;
+import com.mojang.logging.annotations.MethodsReturnNonnullByDefault;
+import com.mojang.logging.annotations.FieldsAreNonnullByDefault;
 
 import javax.annotation.ParametersAreNonnullByDefault;

@@ -1,9 +1,4 @@
-@ParametersAreNonnullByDefault
-@MethodsReturnNonnullByDefault
-@FieldsAreNonnullByDefault
+@NullMarked
 package com.blamejared.searchables.lang;
 
-import com.mojang.logging.annotations.MethodsReturnNonnullByDefault;
-import com.mojang.logging.annotations.FieldsAreNonnullByDefault;
-
-import javax.annotation.ParametersAreNonnullByDefault;
+import org.jspecify.annotations.NullMarked;

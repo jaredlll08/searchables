@@ -16,7 +16,6 @@ import org.lwjgl.glfw.GLFW;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
-import java.util.function.Predicate;
 import java.util.function.Supplier;
 
 public class AutoCompletingEditBox<T> extends EditBox {
@@ -101,17 +100,10 @@ public class AutoCompletingEditBox<T> extends EditBox {
         if(!this.getValue().isEmpty()) {
             if(!range.isEmpty()) {
                 String newValue = range.delete(this.getValue());
-                if(this.getFilter().test(newValue)) {
-                    this.setValue(newValue);
-                    this.moveCursorTo(range.start(), false);
-                }
+                this.setValue(newValue);
+                this.moveCursorTo(range.start(), false);
             }
         }
-    }
-    
-    public Predicate<String> getFilter() {
-        
-        return ((AccessEditBox) this).searchables$getFilter();
     }
     
     @Nullable

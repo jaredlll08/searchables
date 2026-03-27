@@ -11,9 +11,6 @@ import java.util.function.Predicate;
 @Mixin(EditBox.class)
 public interface AccessEditBox {
     
-    @Accessor("filter")
-    Predicate<String> searchables$getFilter();
-    
     @Nullable
     @Accessor("responder")
     Consumer<String> searchables$getResponder();

@@ -23,6 +23,7 @@ public class RootPlugin implements Plugin<Project> {
     @Override
     public void apply(Project project) {
         
+        project.setVersion(GMUtils.updatingVersion(Util.property(project, "mod_version")));
         project.getTasks().register("postDiscord").configure(task -> {
             task.dependsOn(":fabric:publishCurseForge", ":neoforge:publishCurseForge");
             task.doLast(last -> {

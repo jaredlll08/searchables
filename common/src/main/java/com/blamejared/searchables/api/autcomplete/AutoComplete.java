@@ -2,19 +2,18 @@ package com.blamejared.searchables.api.autcomplete;
 
 import com.blamejared.searchables.api.SearchableType;
 import com.blamejared.searchables.api.TokenRange;
-import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.components.AbstractWidget;
 import net.minecraft.client.gui.narration.NarrationElementOutput;
 import net.minecraft.client.input.MouseButtonEvent;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TextColor;
 import net.minecraft.util.ARGB;
 import net.minecraft.util.Mth;
 import org.joml.Vector2d;
 
 import java.util.List;
-import java.util.Objects;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
 
@@ -169,7 +168,7 @@ public class AutoComplete<T> extends AbstractWidget implements Consumer<String> 
             boolean hovered = selectedIndex != -1 && displayOffset + selectedIndex == i;
             
             extractor.fill(this.getX(), minY, this.getX() + this.getWidth(), maxY, hovered ? 0xe0111111 : 0xe0000000);
-            extractor.text(Minecraft.getInstance().font, suggestion.display(), minX, minY + 1, hovered ? ARGB.opaque(Objects.requireNonNull(ChatFormatting.YELLOW.getColor())) : 0xFFFFFFFF);
+            extractor.text(Minecraft.getInstance().font, suggestion.display(), minX, minY + 1, hovered ? ARGB.opaque(TextColor.YELLOW.getValue()) : 0xFFFFFFFF);
         }
         this.lastMousePosition.set(mx, my);
     }

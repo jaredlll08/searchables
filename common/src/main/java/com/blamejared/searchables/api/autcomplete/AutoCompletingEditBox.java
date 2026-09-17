@@ -11,7 +11,8 @@ import net.minecraft.client.input.KeyEvent;
 import net.minecraft.client.input.MouseButtonEvent;
 import net.minecraft.network.chat.Component;
 import org.jetbrains.annotations.Nullable;
-import org.lwjgl.glfw.GLFW;
+import org.lwjgl.sdl.SDLMouse;
+import org.lwjgl.sdl.SDLScancode;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -57,7 +58,7 @@ public class AutoCompletingEditBox<T> extends EditBox {
         if(this.isFocused() && autoComplete.mouseClicked(event, doubleClick)) {
             return true;
         }
-        if((isMouseOver(event.x(), event.y()) || autoComplete().isMouseOver(event.x(), event.y())) && event.button() == GLFW.GLFW_MOUSE_BUTTON_RIGHT) {
+        if((isMouseOver(event.x(), event.y()) || autoComplete().isMouseOver(event.x(), event.y())) && event.button() == SDLMouse.SDL_BUTTON_RIGHT) {
             this.setValue("");
             return true;
         }
@@ -79,11 +80,11 @@ public class AutoCompletingEditBox<T> extends EditBox {
             this.autoComplete().insertSuggestion();
             return true;
         }
-        if(event.key() == GLFW.GLFW_KEY_PAGE_DOWN) {
+        if(event.input() == SDLScancode.SDL_SCANCODE_PAGEDOWN) {
             this.autoComplete.scrollDown(this.autoComplete().maxSuggestions());
             return true;
         }
-        if(event.key() == GLFW.GLFW_KEY_PAGE_UP) {
+        if(event.input() == SDLScancode.SDL_SCANCODE_PAGEUP) {
             this.autoComplete.scrollUp(this.autoComplete().maxSuggestions());
             return true;
         }
